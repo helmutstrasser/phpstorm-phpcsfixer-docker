@@ -7,7 +7,7 @@ within docker some particularities have to be considered.
 
 To set up the code validation is the easy part:
 
-![](/Users/hstrasser/Downloads/phpstorm-phpcsfixer-docker/images/screen001.png "Set up PHP CS Fixer within Docker")
+![](./images/screen001.png "Set up PHP CS Fixer within Docker")
 
 Click the three dots left to "Show ignored files" and configure the 
 Docker interpreter. There is a good description about this configuration
@@ -17,7 +17,7 @@ on the DDEV documentation website</a>.
 For the second part create a new external tool in Settings -> Tools ->
 External Tools:
 
-![](/Users/hstrasser/Downloads/phpstorm-phpcsfixer-docker/images/screen002.png "External tool setup")
+![](./images/screen002.png "External tool setup")
 
 ... where "Program:" shows the path to a file with the following content:
 
@@ -43,7 +43,7 @@ The working directory should read ``` $ProjectFileDir$ ```
 That's it. You can create a shortcut to run php-cs-fixer. It's located
 here: 
 
-![](/Users/hstrasser/Downloads/phpstorm-phpcsfixer-docker/images/screen003.png "Shortcut for tool")
+![](./images/screen003.png "Shortcut for tool")
 
 ## PHPStorm bug with setting "Synchronize files after execution"
 
