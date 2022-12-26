@@ -23,7 +23,7 @@ External Tools:
 
 ```
 #!/bin/bash
-/usr/local/bin/docker exec conatiner-name /usr/bin/php /var/www/html/vendor/bin/php-cs-fixer "$@"
+/usr/local/bin/docker exec container-name /usr/bin/php /var/www/html/vendor/bin/php-cs-fixer "$@"
 ```
 
 Here comes the first banana skin. It looks like php-cs-fixer can not be run with docker compose.
