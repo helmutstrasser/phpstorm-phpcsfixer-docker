@@ -27,7 +27,14 @@ External Tools:
 ```
 
 Here comes the first banana skin. It looks like php-cs-fixer can not be run with docker compose.
-Use docker exec, followed by the name of the docker container!
+Use docker exec, followed by the name of the docker container!<br>
+Alternatively you can also use DDEV if applicable:
+
+```
+#!/bin/bash
+cd /path/to/project/with/ddev && ddev exec -s web php vendor/bin/php-cs-fixer "$@"
+```
+
 Save this file and enter the path to the file in the "Program:"-field 
 shown above (... php-cs-fixer-helper). Don't forget to make this file
 executable!
