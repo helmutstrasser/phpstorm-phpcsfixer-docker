@@ -3,7 +3,7 @@
 <!-- TOC -->
 * [Quality Tools setup](#quality-tools-setup)
 * [External Tools setup](#external-tools-setup)
-* [PHPStorm bug with setting "Synchronize files after execution"](#phpstorm-bug-with-setting--synchronize-files-after-execution-)
+* [PHPStorm bug with setting synchronize files after execution](#phpstorm-bug-with-setting-synchronize-files-after-execution)
 <!-- TOC -->
 
 In PHPStorm two independent parts have to be set up correctly to get full
@@ -70,7 +70,7 @@ here:
 
 ![](./images/screen003.png "Shortcut for tool")
 
-## PHPStorm bug with setting "Synchronize files after execution"
+## PHPStorm bug with setting synchronize files after execution
 
 Unfortunately the setting "Synchronize files after execution" is not
 working as intended. So if you hit the shortcut to run the external tool,
