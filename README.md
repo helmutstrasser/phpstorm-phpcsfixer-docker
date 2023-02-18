@@ -6,9 +6,8 @@
 * [PHPStorm bug with setting synchronize files after execution](#phpstorm-bug-with-setting-synchronize-files-after-execution)
 <!-- TOC -->
 
-In PHPStorm two independent parts have to be set up correctly to get full
-php-cs-fixer support working. One to mark code which has to be fixed, and
-another to apply changes written to the file. And to get things working
+To get full php-cs-fixer support working in PHPStorm, two independent parts have to be set up correctly.
+One to highlight code which has to be fixed, and another to apply changes written to the file. And to get things working
 within docker some particularities have to be considered.
 
 ## Quality Tools setup
@@ -21,15 +20,15 @@ To set up the code validation is the easy part:
 ![](./images/screen001.png "Set up PHP CS Fixer within Docker")
 
 Click the three dots left to "Show ignored files" and configure the 
-Docker interpreter. There is a good description about this configuration
+Docker interpreter. A good description about this configuration can be found
 <a href="https://ddev.readthedocs.io/en/latest/users/topics/phpstorm/">
 on the DDEV documentation website</a>.
 
 ## External Tools setup
 
-As mentioned above, settings within the External Tools configuration apply to all projects. This is a real shame and
-discussed for years here: [Jetbrains bug tracker](https://youtrack.jetbrains.com/issue/IDEA-120007/External-Tools-configuration-cant-be-saved-as-project-level-settings).
-So we have to find a solution which will work for several projects, not only the currently opened one.
+As mentioned above, settings within the External Tools configuration apply to all projects, which is a problem and
+[has been discussed for years](https://youtrack.jetbrains.com/issue/IDEA-120007/External-Tools-configuration-cant-be-saved-as-project-level-settings).
+So we have to find an as generic as possible solution.
 
 Create a new entry in Settings -> Tools -> External Tools:
 
@@ -42,8 +41,8 @@ Create a new entry in Settings -> Tools -> External Tools:
 /usr/local/bin/docker exec container-name /usr/bin/php vendor/friendsofphp/php-cs-fixer/php-cs-fixer --config=.php-cs-fixer.php "$@"
 ```
 
-Change paths according to your project. As you can see we use paths that can easily apply for any project. The custom
-paths are located within the external file (.php-cs-fixer-helper) and can be changed for the particular project.
+Change paths according to your project. Use paths that can easily apply for any project. The custom
+path is located within the external file (.php-cs-fixer-helper) and can be changed for the particular project.
 
 Here comes the first banana skin. It looks like php-cs-fixer can not be run with docker compose.
 Use docker exec, followed by the name of the docker container!<br>
@@ -54,30 +53,40 @@ Alternatively you can also use DDEV if applicable:
 ddev exec -s web php vendor/friendsofphp/php-cs-fixer/php-cs-fixer --config=.php-cs-fixer.php "$@"
 ```
 
+... which benefits from not having to know the name of the container.
+
 Save this file and enter the path to the file in the "Program:"-field 
-shown above (... ./.php-cs-fixer-helper). _Don't forget to make this file
-executable!_
+shown above (... ./.php-cs-fixer-helper).
+
+```
+Don't forget to make this file executable!
+```
 
 In the "Arguments:"-field use a variable to tell PHPStorm to run php-cs-fixer just for the current file:
 ```
 fix $RemoteProjectFileDir$
 ```
 
-The working directory should read ``` $ProjectFileDir$ ```
+Do so, if you don't want php-cs-fixer to scan the complete project every time you
+run the fixer.
+
+The "Working directory" should read ``` $ProjectFileDir$ ```
+
+Activate "Synchronize files after execution" (and read about a bug below).
 
 That's it. You can create a shortcut to run php-cs-fixer. It's located
 here: 
 
 ![](./images/screen003.png "Shortcut for tool")
 
-## PHPStorm bug with setting synchronize files after execution
+## PHPStorm bug with setting "Synchronize files after execution"
 
-Unfortunately the setting "Synchronize files after execution" is not
-working as intended. So if you hit the shortcut to run the external tool,
-nothing will happen, though php-cs-fixer did his job. But as we
-let php-cs-fixer change the file within docker, PHPStorm doesn't 
-recognize any changes, as long as we don't synchronize the current file.
-As a workaround this command can be bound to a shortcut close to the
-external tool we did before. Let's say we use option-shift-f for the 
-php-cs-fixer and bind "Reload all from disk" to option-shift-g, the
-changed file can be quickly synchronized after applying php-cs-fixer.
+At the time being there is a bug existing which prevents PHPStorm from reloading
+files changed from external tools.
+[A bugfix has already been published](https://youtrack.jetbrains.com/issue/IDEA-309781/External-Tools-Synchronize-files-after-execution-doesnt-wait-for-the-command-to-finish-unless-the-console-is-open),
+but the PHPStorm release in still in early access (EAP). As a temporary 
+workaround you should add
+```
+sleep 1
+```
+to the end of the helper file.
