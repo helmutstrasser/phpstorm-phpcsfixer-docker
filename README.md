@@ -24,6 +24,8 @@ Docker interpreter. A good description about this configuration can be found
 <a href="https://ddev.readthedocs.io/en/latest/users/topics/phpstorm/">
 on the DDEV documentation website</a>.
 
+If you want to use your own ruleset (as seen in the screenshot above), notice to use the path within the container, not the local one.
+
 ## External Tools setup
 
 As mentioned above, settings within the External Tools configuration apply to all projects, which is a problem and
