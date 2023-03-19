@@ -84,7 +84,7 @@ here:
 ## PHPStorm bug with setting "Synchronize files after execution"
 
 Before PHPStorm version 2022.3.3 a bug prevented PHPStorm from reloading files changed from external tools
-[Link to discussion and the bugfix](https://youtrack.jetbrains.com/issue/IDEA-309781/External-Tools-Synchronize-files-after-execution-doesnt-wait-for-the-command-to-finish-unless-the-console-is-open). If you can't or don't want to update, the following workaround will reload the file changed by an external tool. Just add
+([Link to discussion and the bugfix](https://youtrack.jetbrains.com/issue/IDEA-309781/External-Tools-Synchronize-files-after-execution-doesnt-wait-for-the-command-to-finish-unless-the-console-is-open)). If you can't or don't want to update, the following workaround will reload the file changed by an external tool. Just add
 ```
 sleep 1
 ```
