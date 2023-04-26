@@ -81,6 +81,8 @@ here:
 
 ![](./images/screen003.png "Shortcut for tool")
 
+A little piece of advice:<br>Do NOT change the name of the external tool configuration (in our case "PHP-CS-Fixer") afterwards! Otherwise, PHPStorm will hide the keymap ("PHP-CS-Fixer" won't show up anymore) and the mapping won't work any longer.
+
 ## PHPStorm bug with setting "Synchronize files after execution"
 
 Before PHPStorm version 2022.3.3 a bug prevented PHPStorm from reloading files changed from external tools
